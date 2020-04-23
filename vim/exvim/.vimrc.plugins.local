@@ -1,0 +1,85 @@
+" This file will be loaded after .vimrc.plugins, 
+" but before 'filetype plugin on', 'filetype indent on' and 'syntax on' been executed. 
+" This file is designed to be safe to add your own plugins and plugins' configuration.
+
+" Add your customized plugins:
+" Example: Plugin 'foo/bar/foobar'
+"
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'moll/vim-bbye'
+
+
+" Plugins {
+	" airline {
+		set laststatus=2
+		set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+		set t_Co=256
+		let g:airline_left_sep = '>'
+		let g:airline_right_sep = '<'
+		"let g:airline_left_alt_sep = ''
+		"let g:airline_right_alt_sep = ''
+		let g:airline#extensions#tabline#enabled = 1
+		let g:airline#extensions#tabline#left_sep = ' '
+		let g:airline#extensions#tabline#left_alt_sep = '|'
+		let g:airline#extensions#tabline#fnamecollapse = 0
+
+		set ttimeoutlen=50
+		let g:airline_theme='dark'
+		"let g:airline_theme='badwolf'
+		"let g:airline#extensions#tagbar#enabled = 1
+		"let g:airline#extensions#tagbar#flags = 's'
+	"}
+	" nerdtree{
+		let g:NERDTree_title="[NERDTree]"
+		autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+		" Close all open buffers on entering a window if the only
+		" buffer that's left is the NERDTree buffer
+		function! s:CloseIfOnlyNerdTreeLeft()
+            		if exists("t:NERDTreeBufName")
+                		if bufwinnr(t:NERDTreeBufName) != -1
+                    			if winnr("$") == 1
+                        			q
+                    			elseif winnr("$") == 2
+                        			if bufwinnr("__Tag_List__") != -1
+                            				q
+                        			endif
+                    			endif
+                		endif
+            		endif
+        	endfunction
+	" }
+	" ex-project{
+		let g:ex_project_winsize=20
+		let g:ex_project_winsize_zoom=60
+	"}ex-project
+	"nerdtree{
+		let g:NERDTreeWinSize = 20
+    	"}
+	"tagbar{
+		let g:tagbar_width = 25
+	"}
+	"Ctrlp{
+		let g:ctrlp_map = '<c-p>'
+		let g:ctrlp_cmd = 'CtrlP'
+		let g:ctrlp_working_path_mode = 'ra'
+		set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+		"let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+		let g:ctrlp_custom_ignore = {
+		  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+		  \ 'file': '\v\.(exe|so|dll)$',
+		  \ 'link': 'some_bad_symbolic_links',
+		  \ }
+		let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:6,results:6'
+	"}
+	"cscope{
+		nmap <C-_>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+        	nmap <C-_>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+        	nmap <C-_>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+        	nmap <C-_>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+        	nmap <C-_>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+        	nmap <C-_>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+        	nmap <C-_>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+        	nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+    	"}
+" } end plugins
