@@ -28,3 +28,9 @@ sudo apt-get install numix-gtk-theme numix-icon-theme-circle -y
 sudo add-apt-repository ppa:noobslab/macbuntu
 sudo apt-get update
 sudo apt-get install macbuntu-os-icons-lts-v7  macbuntu-os-ithemes-lts-v7  -y
+
+
+
+sudo add-apt-repository ppa:snwh/pulp
+sudo apt-get update
+sudo apt-get install paper-icon-theme
