@@ -15,7 +15,7 @@
 #sudo apt-get update
 #sudo apt-get install openjdk-8-jdk -y
 
-sudo apt install vim git gitk gitg htop minicom tmux cmake lftp meld -y
+sudo apt install vim git gitk gitg htop minicom tmux cmake lftp meld net-tools -y
 
 # inputs
 sudo apt install fcitx fcitx-bin fcitx-config-common fcitx-table fcitx-table-wubi fcitx-ui-qimpanel fcitx-table-wubi-large fcitx-table-emoji -y
@@ -28,6 +28,12 @@ sudo apt install fcitx fcitx-bin fcitx-config-common fcitx-table fcitx-table-wub
 
 # swith Desktop Manager between gdm3 and LightDM
 # sudo dpkg-reconfigure gdm3
+
+#python
+sudo apt install python
+# sudo apt install python-pip
+# python -m pip install requests
+# python -m pip install configparser
 
 # tools
 sudo apt install openssh-server -y

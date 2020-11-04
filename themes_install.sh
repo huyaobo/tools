@@ -25,9 +25,10 @@ sudo add-apt-repository ppa:numix/ppa -y
 sudo apt-get update
 sudo apt-get install numix-gtk-theme numix-icon-theme-circle -y
 
-sudo add-apt-repository ppa:noobslab/macbuntu
+sudo add-apt-repository ppa:noobslab/macbuntu -y
 sudo apt-get update
-sudo apt-get install macbuntu-os-icons-lts-v7  macbuntu-os-ithemes-lts-v7  -y
+#sudo apt-get install macbuntu-os-icons-lts-v7  macbuntu-os-ithemes-lts-v7  -y
+sudo apt-get install macbuntu-os-*  -y
 
 
 
