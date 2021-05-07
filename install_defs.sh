@@ -10,12 +10,29 @@
 #sudo apt-get install lib32z-dev libncurses5-dev ccache -y
 
 
-#install open jdk 1.8
-#sudo add-apt-repository ppa:openjdk-r/ppa -y
-#sudo apt-get update
-#sudo apt-get install openjdk-8-jdk -y
+#for ubuntu 18.04 install android compile env
+ubuntu_version=`lsb_release -a 2>/dev/null  | awk  '/Release/{print $2}'`
+if [ "$ubuntu_version" = "18.04" ]
+then
+	echo "install android compile env for Ubuntu 18.04"
+	sudo apt install -y axel git ccache automake flex lzop bison \
+		gperf build-essential zip curl zlib1g-dev zlib1g-dev:i386 \
+		g++-multilib python-networkx libxml2-utils bzip2 libbz2-dev \
+		libbz2-1.0 libghc-bzlib-dev squashfs-tools pngcrush \
+		schedtool dpkg-dev liblz4-tool make optipng maven libssl-dev \
+		pwgen libswitch-perl policycoreutils libxml-sax-base-perl \
+		libxml-simple-perl bc libc6-dev-i386 lib32ncurses5-dev \
+		x11proto-core-dev libx11-dev lib32z-dev libgl1-mesa-dev \
+		xsltproc unzip m4  uuid-dev
+fi
 
-sudo apt install vim git gitk gitg htop minicom tmux cmake lftp meld net-tools -y
+
+#install open jdk 1.8
+sudo add-apt-repository ppa:openjdk-r/ppa -y
+sudo apt-get update
+sudo apt-get install openjdk-8-jdk -y
+
+sudo apt install vim vim-gui-common git gitk gitg htop minicom tmux cmake lftp meld net-tools curl -y
 
 # inputs
 sudo apt install fcitx fcitx-bin fcitx-config-common fcitx-table fcitx-table-wubi fcitx-ui-qimpanel fcitx-table-wubi-large fcitx-table-emoji -y
@@ -30,7 +47,7 @@ sudo apt install fcitx fcitx-bin fcitx-config-common fcitx-table fcitx-table-wub
 # sudo dpkg-reconfigure gdm3
 
 #python
-sudo apt install python
+sudo apt install python -y
 # sudo apt install python-pip
 # python -m pip install requests
 # python -m pip install configparser
@@ -43,18 +60,22 @@ sudo apt install unity-tweak-tool -y
 #sudo apt install npm -y
 
 # exvim defs
-sudo apt install exuberant-ctags cscope id-utils gawk  -y
+sudo apt install exuberant-ctags cscope id-utils silversearcher-ag gawk  -y
 
 # a eye protect tool
-sudo apt install redshift*
+sudo apt install redshift* -y
 # safe eye
 sudo add-apt-repository ppa:slgobinath/safeeyes -y
 sudo apt update
 sudo apt install safeeyes -y
 
 #media
-sudo apt install vlc
+sudo apt install vlc -y
 
 # shell
 #sudo apt install tcsh
-sudo apt install zsh
+sudo apt install zsh -y
+sudo apt install fonts-powerline -y
+
+# misc
+sudo apt install rar -y

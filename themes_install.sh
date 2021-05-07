@@ -32,6 +32,6 @@ sudo apt-get install macbuntu-os-*  -y
 
 
 
-sudo add-apt-repository ppa:snwh/pulp
+sudo add-apt-repository ppa:snwh/pulp -y
 sudo apt-get update
-sudo apt-get install paper-icon-theme
+sudo apt-get install paper-icon-theme -y

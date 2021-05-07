@@ -20,7 +20,8 @@ endif
 " set cuc
 set cul
 "highlight CursorLine   cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
-highlight CursorLine   cterm=NONE ctermbg=DarkBlue ctermfg=green guibg=NONE guifg=NONE
+" highlight CursorLine   cterm=NONE ctermbg=DarkBlue ctermfg=green guibg=NONE guifg=NONE
+highlight CursorLine   cterm=NONE ctermbg=DarkCyan ctermfg=green guibg=NONE guifg=NONE
 highlight CursorColumn cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
 highlight CursorColumn cterm=NONE ctermbg=DarkBlue ctermfg=green guibg=NONE guifg=NONE
 
@@ -73,6 +74,8 @@ let g:airline#extensions#tagbar#enabled = 1
 
 "----------------------------------------------------------
 Plugin 'moll/vim-bbye'
+Plugin 'exvim/ex-utility'
+Plugin 'exvim/ex-gsearch'
 
 
 
@@ -98,3 +101,8 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
+"Shift ctrl c and v to clipboard
+" vmap <S-C-C> "+y
+vmap <C-c> "+y
+nmap <S-C-V> "+p
