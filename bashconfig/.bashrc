@@ -116,6 +116,14 @@ if ! shopt -oq posix; then
   fi
 fi
 
+function settitle() {
+  if [[ -z "$ORIG" ]]; then
+    ORIG=$PS1
+  fi
+  TITLE="\[\e]2;$*\a\]"
+  PS1=${ORIG}${TITLE}
+}
+
 [[ -s /home/mi/.autojump/etc/profile.d/autojump.sh ]] && source /home/mi/.autojump/etc/profile.d/autojump.sh
 
 export PATH="$PATH:/home/mi/Android/Sdk/platform-tools:~/opt/adb"

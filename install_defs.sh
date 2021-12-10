@@ -32,6 +32,9 @@ sudo add-apt-repository ppa:openjdk-r/ppa -y
 sudo apt-get update
 sudo apt-get install openjdk-8-jdk -y
 
+#gcc
+sudo apt install gcc-aarch64-linux-gnu -y
+
 sudo apt install vim vim-gui-common git gitk gitg htop minicom tmux cmake lftp meld net-tools curl -y
 
 # inputs
@@ -47,10 +50,12 @@ sudo apt install fcitx fcitx-bin fcitx-config-common fcitx-table fcitx-table-wub
 # sudo dpkg-reconfigure gdm3
 
 #python
-sudo apt install python -y
+sudo apt install python python-pip -y
 # sudo apt install python-pip
 # python -m pip install requests
 # python -m pip install configparser
+# for systrace
+pip install six
 
 # tools
 sudo apt install openssh-server -y
@@ -79,3 +84,10 @@ sudo apt install fonts-powerline -y
 
 # misc
 sudo apt install rar -y
+sudo apt install apt-file -y
+#sysstat include: pidstat,sar,mpstat
+sudo apt install sysstat -y
+# sudo install latest version from https://github.com/flameshot-org/flameshot
+# wget https://github.com/flameshot-org/flameshot/releases/download/v0.10.2/flameshot-0.10.2-1.ubuntu-18.04.amd64.deb
+# sudo apt install flameshot -y
+sudo dpkg -i flameshot-0.10.2-1.ubuntu-18.04.amd64.deb
