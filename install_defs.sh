@@ -1,10 +1,10 @@
 #!/bin/bash
 
 #sudo apt-get install libx11-dev:i386 libreadline6-dev:i386 libgl1-mesa-dev g++-multilib  libc6-dev-i386  -y
-#sudo apt-get install -y git git-core gnupg flex bison gperf build-essential libncurses5-dev:i386
+sudo apt-get install -y git git-core gnupg flex bison gperf build-essential libncurses5-dev:i386
 #sudo apt-get install tofrodos python-markdown libxml2-utils xsltproc zlib1g-dev:i386  -y
 #sudo apt-get install dpkg-dev libsdl1.2-dev libesd0-deva -y
-#sudo apt-get install zip curl zlib1g-dev gcc-multilib g++-multilib  -y
+sudo apt-get install zip curl zlib1g-dev gcc-multilib g++-multilib  -y
 #sudo apt-get install lib32ncurses5-dev x11proto-core-dev libx11-dev  -y
 #sudo apt-get install libgl1-mesa-dev libxml2-utils xsltproc unzip m4 -y
 #sudo apt-get install lib32z-dev libncurses5-dev ccache -y
@@ -32,8 +32,6 @@ sudo add-apt-repository ppa:openjdk-r/ppa -y
 sudo apt-get update
 sudo apt-get install openjdk-8-jdk -y
 
-#gcc
-sudo apt install gcc-aarch64-linux-gnu -y
 
 sudo apt install vim vim-gui-common git gitk gitg htop minicom tmux cmake lftp meld net-tools curl -y
 
@@ -84,6 +82,7 @@ sudo apt install fonts-powerline -y
 
 # misc
 sudo apt install rar -y
+sudo apt install p7zip-full  -y
 sudo apt install apt-file -y
 #sysstat include: pidstat,sar,mpstat
 sudo apt install sysstat -y
@@ -91,3 +90,13 @@ sudo apt install sysstat -y
 # wget https://github.com/flameshot-org/flameshot/releases/download/v0.10.2/flameshot-0.10.2-1.ubuntu-18.04.amd64.deb
 # sudo apt install flameshot -y
 sudo dpkg -i flameshot-0.10.2-1.ubuntu-18.04.amd64.deb
+
+# qemu env:
+#x84-64
+sudo apt install flex bison libssl-dev libelf-dev debootstrap qemu-system dwarves qemu-kvm qemu-system-x86 -y
+#arm64
+sudo apt install qemu qemu-system qemu-user qemu-system-aarch64 -y
+
+#arm64-raspberry-pi-eqmu
+sudo apt install qemu-system-arm qemu-system libncurses5-dev qemu-user qemu-system-aarch64 -y
+sudo apt install gcc-aarch64-linux-gnu -y
