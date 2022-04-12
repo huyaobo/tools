@@ -32,17 +32,19 @@ sudo add-apt-repository ppa:openjdk-r/ppa -y
 sudo apt-get update
 sudo apt-get install openjdk-8-jdk -y
 
-
-sudo apt install vim vim-gui-common git gitk gitg htop minicom tmux cmake lftp meld net-tools curl -y
+# tools
+sudo apt install vim vim-gui-common git gitk gitg htop minicom tmux cmake lftp meld net-tools curl tree -y
+sudo apt install openssh-server -y
+sudo apt install unity-tweak-tool -y
 
 # inputs
 sudo apt install fcitx fcitx-bin fcitx-config-common fcitx-table fcitx-table-wubi fcitx-ui-qimpanel fcitx-table-wubi-large fcitx-table-emoji -y
 
 #update kernel defs
-#sudo apt install libncurses5-dev libssl-dev  -y
-#sudo apt install zlibc minizip -y
-#sudo apt install openssl build-essential -y
-#sudo apt install libidn11-dev libidn11 -y
+sudo apt install libncurses5-dev libssl-dev  -y
+sudo apt install zlibc minizip -y
+sudo apt install openssl build-essential -y
+sudo apt install libidn11-dev libidn11 -y
 
 # swith Desktop Manager between gdm3 and LightDM
 # sudo dpkg-reconfigure gdm3
@@ -55,9 +57,6 @@ sudo apt install python python-pip -y
 # for systrace
 pip install six
 
-# tools
-sudo apt install openssh-server -y
-sudo apt install unity-tweak-tool -y
 
 # Electron def
 #sudo apt install npm -y
