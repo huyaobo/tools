@@ -54,7 +54,7 @@ Plugin 'moll/vim-bbye'
 		let g:ex_project_winsize_zoom=60
 	"}ex-project
 	"nerdtree{
-		let g:NERDTreeWinSize = 20
+		let g:NERDTreeWinSize = 25
     	"}
 	"tagbar{
 		let g:tagbar_width = 25

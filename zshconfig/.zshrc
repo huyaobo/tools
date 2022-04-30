@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="~/.oh-my-zsh"
+export ZSH="/home/mi/.oh-my-zsh"
 
 
 # Set name of the theme to load --- if set to "random", it will
@@ -11,13 +11,14 @@ export ZSH="~/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="robbyrussell"
 # ZSH_THEME="ys"
-ZSH_THEME="agnoster"
+# ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" "powerlevel9k")
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -71,10 +72,23 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(autojump  zsh-autosuggestions)
+# plugins=(autojump extract fasd zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(autojump extract zsh-autosuggestions zsh-syntax-highlighting)
 
+function settitle() {
+    if [[ -z "$ORIG" ]]; then
+        ORIG=$PS1
+    fi
+    TITLE="\[\e]2;$*\a\]"
+    PS1=${ORIG}${TITLE}
+}
+
+[[ -s /home/mi/.autojump/etc/profile.d/autojump.sh ]] && source /home/mi/.autojump/etc/profile.d/autojump.sh
 # Load zsh-autosuggestions.
 source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 
+
+# Load my p9k custom theme
+source ~/.p9k-custom.theme
 
 source $ZSH/oh-my-zsh.sh
 
@@ -103,12 +117,17 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && source ~/.autojump/etc/profile.d/autojump.sh
+
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
 
 #source ~/.oh-my-zsh/plugins/incr/incr*.zsh
 
-export PATH="$PATH:~/Android/Sdk/platform-tools:~/opt/adb"
+export PATH="$PATH:/home/mi/Android/Sdk/platform-tools:~/opt/adb"
 
-alias st-start='python ~/Android/Sdk/platform-tools/systrace/systrace.py'
+alias st-start='python /home/mi/Android/Sdk/platform-tools/systrace/systrace.py'
 alias st-start-gfx-trace='st-start gfx input view sched freq wm am hwui workq res dalvik sync disk load perf hal rs idle mmc'
 #alias st-start-gfx-trace = 'st-start gfx input view sched freq wm am res dalvik sync disk  hal rs idle'

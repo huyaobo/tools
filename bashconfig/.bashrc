@@ -117,11 +117,11 @@ if ! shopt -oq posix; then
 fi
 
 function settitle() {
-  if [[ -z "$ORIG" ]]; then
-    ORIG=$PS1
-  fi
-  TITLE="\[\e]2;$*\a\]"
-  PS1=${ORIG}${TITLE}
+    if [[ -z "$ORIG" ]]; then
+        ORIG=$PS1
+    fi
+    TITLE="\[\e]2;$*\a\]"
+    PS1=${ORIG}${TITLE}
 }
 
 [[ -s /home/mi/.autojump/etc/profile.d/autojump.sh ]] && source /home/mi/.autojump/etc/profile.d/autojump.sh
@@ -131,3 +131,8 @@ export PATH="$PATH:/home/mi/Android/Sdk/platform-tools:~/opt/adb"
 alias st-start='python /home/mi/Android/Sdk/platform-tools/systrace/systrace.py'
 alias st-start-gfx-trace='st-start gfx input view sched freq wm am hwui workq res dalvik sync disk load perf hal rs idle mmc'
 #alias st-start-gfx-trace = 'st-start gfx input view sched freq wm am res dalvik sync disk  hal rs idle'
+# eval `dircolors ~/.dircolors`
+if [ -f ~/.dir_colors/dircolors ]
+then
+    eval `dircolors ~/.dir_colors/dircolors`
+fi

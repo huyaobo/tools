@@ -6,8 +6,8 @@ sudo apt-get install -y git git-core gnupg flex bison gperf build-essential libn
 #sudo apt-get install dpkg-dev libsdl1.2-dev libesd0-deva -y
 sudo apt-get install zip curl zlib1g-dev gcc-multilib g++-multilib  -y
 #sudo apt-get install lib32ncurses5-dev x11proto-core-dev libx11-dev  -y
-#sudo apt-get install libgl1-mesa-dev libxml2-utils xsltproc unzip m4 -y
-#sudo apt-get install lib32z-dev libncurses5-dev ccache -y
+sudo apt-get install libgl1-mesa-dev libxml2-utils xsltproc unzip m4 -y
+sudo apt-get install lib32z-dev libncurses5-dev ccache pkg-config -y
 
 
 #for ubuntu 18.04 install android compile env
@@ -36,6 +36,11 @@ sudo apt-get install openjdk-8-jdk -y
 sudo apt install vim vim-gui-common git gitk gitg htop minicom tmux cmake lftp meld net-tools curl tree -y
 sudo apt install openssh-server -y
 sudo apt install unity-tweak-tool -y
+# tilix is a termial handily ^_^
+sudo apt install tilix -y
+
+# xclip is a tool that copy from tmux buffer to system buffer (clipboard)
+sudo apt install xclip -y
 
 # inputs
 sudo apt install fcitx fcitx-bin fcitx-config-common fcitx-table fcitx-table-wubi fcitx-ui-qimpanel fcitx-table-wubi-large fcitx-table-emoji -y
@@ -63,6 +68,7 @@ pip install six
 
 # exvim defs
 sudo apt install exuberant-ctags cscope id-utils silversearcher-ag gawk  -y
+sudo apt install elpa-solarized-theme -y
 
 # a eye protect tool
 sudo apt install redshift* -y
@@ -75,9 +81,10 @@ sudo apt install safeeyes -y
 sudo apt install vlc -y
 
 # shell
-#sudo apt install tcsh
+##sudo apt install tcsh
 sudo apt install zsh -y
 sudo apt install fonts-powerline -y
+sudo apt install fasd -y
 
 # misc
 sudo apt install rar -y
@@ -99,3 +106,7 @@ sudo apt install qemu qemu-system qemu-user qemu-system-aarch64 -y
 #arm64-raspberry-pi-eqmu
 sudo apt install qemu-system-arm qemu-system libncurses5-dev qemu-user qemu-system-aarch64 -y
 sudo apt install gcc-aarch64-linux-gnu -y
+
+
+#dev depend libs
+sudo apt install libevent-dev -y

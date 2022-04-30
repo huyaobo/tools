@@ -63,7 +63,7 @@ Plugin 'VundleVim/Vundle.vim'
 " ----------------------custome plugin-----------------------------------
 "------------------------airline----------------------------------
 Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+" Plugin 'vim-airline/vim-airline-themes'
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
@@ -75,9 +75,16 @@ let g:airline#extensions#tagbar#enabled = 1
 "----------------------------------------------------------
 Plugin 'moll/vim-bbye'
 Plugin 'exvim/ex-utility'
-Plugin 'exvim/ex-gsearch'
+" Plugin 'exvim/ex-gsearch'
+Plugin 'Yggdroot/LeaderF'
 
 
+"-----------------vim-colors-solarized-----------------------------------------
+set rtp+=~/.vim/bundle/vim-colors-solarized
+Plugin 'altercation/vim-colors-solarized'
+syntax enable
+set background=dark
+colorscheme solarized
 
 Plugin 'scrooloose/nerdcommenter'
 let g:NERDSpaceDelims = 1

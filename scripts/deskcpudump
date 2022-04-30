@@ -1,0 +1,215 @@
+#!/bin/bash
+
+
+color_black_on="printf \033[30m"
+color_red_on="printf \033[31m"
+color_green_on="printf \033[32m"
+color_yellow_on="printf \033[33m"
+color_blue_on="printf \033[34m"
+color_purple_on="printf \033[35m"
+color_cyan_on="printf \033[36m"
+color_white_on="printf \033[37m"
+
+color_off="printf \033[0m"
+
+
+#######################################################################
+
+little_str="小核"
+big_str="大核"
+super_str="超核"
+
+cores=$(ls -d /sys/devices/system/cpu/cpu[0-9]* | wc -l)
+little=0
+big=$cores
+super=$cores
+
+i=0
+node[i]=0
+
+next=$(cat /sys/devices/system/cpu/cpu0/topology/core_siblings_list)
+next=${next#*-}
+next=$((next + 1))
+while [ $next -lt $cores ]
+do
+	let i++
+	node[i]=$next
+	next=$(cat /sys/devices/system/cpu/cpu${node[$i]}/topology/core_siblings_list)
+	next=${next#*-}
+	next=$((next + 1))
+done
+
+nr=${#node[*]}
+for((i=0; i < nr; i++))
+do
+	for((j=nr-1; j > i; j--))
+	do
+		cur1=$(cat "/sys/devices/system/cpu/cpufreq/cpu${node[$j]}/cpuinfo_max_freq")
+		cur2=$(cat "/sys/devices/system/cpu/cpufreq/cpu${node[$((j-1))]}/cpuinfo_max_freq")
+		if [ "$cur1" -lt "$cur2" ] ; then
+			tmp=${node[$j]}
+			node[$j]=${node[$((j-1))]}
+			node[$((j-1))]=$tmp
+		fi
+	done
+done
+
+little=${node[0]}
+if [ $nr -eq 1 ] ;then
+	little_str="通核"
+elif [ $nr -ge 2 ] ;then
+	big=${node[1]}
+	if [ $nr -ge 3 ] ;then
+		super=${node[2]}
+	fi
+fi
+
+
+#-----------------------------------------------------
+
+
+little_hard_min=$(cat /sys/devices/system/cpu/cpu${little}/cpufreq/cpuinfo_min_freq)
+little_hard_min=$(($little_hard_min/1000))
+little_hard_max=$(cat /sys/devices/system/cpu/cpu${little}/cpufreq/cpuinfo_max_freq)
+little_hard_max=$(($little_hard_max/1000))
+
+if [  $big -lt $cores ]; then
+big_hard_min=$(cat /sys/devices/system/cpu/cpu${big}/cpufreq/cpuinfo_min_freq)
+big_hard_min=$(($big_hard_min/1000))
+big_hard_max=$(cat /sys/devices/system/cpu/cpu${big}/cpufreq/cpuinfo_max_freq)
+big_hard_max=$(($big_hard_max/1000))
+fi
+
+if [  $super -lt $cores ]; then
+super_hard_min=$(cat /sys/devices/system/cpu/cpu${super}/cpufreq/cpuinfo_min_freq)
+super_hard_min=$(($super_hard_min/1000))
+super_hard_max=$(cat /sys/devices/system/cpu/cpu${super}/cpufreq/cpuinfo_max_freq)
+super_hard_max=$(($super_hard_max/1000))
+fi
+
+
+
+####################################################################
+#******************************************************************#
+####################################################################
+
+while true
+do
+
+#################### while START ###################### 
+
+
+little_user_min=$(cat /sys/devices/system/cpu/cpu${little}/cpufreq/scaling_min_freq)
+little_user_min=$(($little_user_min/1000))
+
+little_user_max=$(cat /sys/devices/system/cpu/cpu${little}/cpufreq/scaling_max_freq)
+little_user_max=$(($little_user_max/1000))
+
+if [  $big -lt $cores ]; then
+big_user_min=$(cat /sys/devices/system/cpu/cpu${big}/cpufreq/scaling_min_freq)
+big_user_min=$(($big_user_min/1000))
+
+big_user_max=$(cat /sys/devices/system/cpu/cpu${big}/cpufreq/scaling_max_freq)
+big_user_max=$(($big_user_max/1000))
+fi
+
+if [  $super -lt $cores ]; then
+super_user_min=$(cat /sys/devices/system/cpu/cpu${super}/cpufreq/scaling_min_freq)
+super_user_min=$(($super_user_min/1000))
+
+super_user_max=$(cat /sys/devices/system/cpu/cpu${super}/cpufreq/scaling_max_freq)
+super_user_max=$(($super_user_max/1000))
+fi
+
+#---------------------------------------------------------------------
+
+little_cur_freq=$(cat /sys/devices/system/cpu/cpu${little}/cpufreq/scaling_cur_freq)
+little_cur_freq=$(($little_cur_freq/1000))
+
+if [  $big -lt $cores ]; then
+big_cur_freq=$(cat /sys/devices/system/cpu/cpu${big}/cpufreq/scaling_cur_freq)
+if [ "$big_cur_freq" = "<unknown>" ] ;then
+	big_cur_freq=0
+fi
+big_cur_freq=$(($big_cur_freq/1000))
+fi
+
+if [  $super -lt $cores ]; then
+super_cur_freq=$(cat /sys/devices/system/cpu/cpu${super}/cpufreq/scaling_cur_freq)
+if [ $super_cur_freq = "<unknown>" ] ;then
+	super_cur_freq=0
+fi
+super_cur_freq=$(($super_cur_freq/1000))
+fi
+
+#---------------------------------------------------------------------
+
+temp_board=$(cat /sys/class/thermal/thermal_zone0/temp)
+temp_board=$(echo "scale=1;$temp_board/1000" | bc)
+
+temp_cpu=$(cat /sys/class/thermal/thermal_zone1/temp)
+temp_cpu=$(echo "scale=1;$temp_cpu/1000" | bc)
+
+#---------------------------------------------------------------------
+
+onlines=$(cat /sys/devices/system/cpu/cpu*/online)
+onlines=$(echo 1 $onlines)
+
+###################################################################################
+
+
+date
+echo "=============================================="
+printf "CPUFreq and Thermal info dump       %10s\n" "i:$((k++))"
+
+order=$(eval echo {0..$((cores - 1))})
+printf "cores   : %s\n"  "$order"
+printf "online  : %s\n" "$onlines"
+
+echo "----------------------------------------------"
+
+printf "         freq_range    user_limit   freq  temp \n"
+
+printf "%2s%d-%d (%3d--%4d):  [%4d--%4d]  %4d  %3.1f\n" \
+		$little_str \
+        $little $((big   - 1)) \
+        $little_hard_min $little_hard_max \
+        $little_user_min $little_user_max \
+        $little_cur_freq \
+        $temp_cpu
+
+if [  $big -lt $cores ]; then
+printf "%2s%d-%d (%3d--%4d): [%4d--%4d]  %4d  %3.1f\n" \
+		$big_str \
+        $big    $((super - 1)) \
+        $big_hard_min $big_hard_max \
+        $big_user_min $big_user_max \
+        $big_cur_freq \
+        $temp_cpu
+fi
+
+if [  $super -lt $cores ]; then
+printf "%2s%d-%d (%3d--%4d): [%4d--%4d]  %4d  %3.1f\n" \
+		$super_str \
+        $super  $((cores - 1)) \
+        $super_hard_min $super_hard_max \
+        $super_user_min $super_user_max \
+        $super_cur_freq \
+        $temp_cpu
+fi
+
+echo "----------------------------------------------"
+
+printf "%-18s %5s ℃\n"  "Device"       "Temp"
+printf "%-18s %5.1f\n"   "board_hot:"   $temp_board
+printf "%-18s %5.1f\n"   "board_cold:"  $temp_board
+
+printf "\n"
+
+sleep 1
+
+##################### while END #########################
+
+done
+
+
