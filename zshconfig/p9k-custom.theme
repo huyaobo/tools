@@ -88,10 +88,13 @@ then
     # Customize prompt
     # https://github.com/bhilburn/powerlevel9k/wiki/Stylizing-Your-Prompt#adding-newline-before-each-prompt
     POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+    # POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+    # POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
     # https://github.com/bhilburn/powerlevel9k/tree/next#customizing-prompt-segments
+    # POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir_writable dir vcs)
     POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir_writable dir vcs)
     # POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs_joined)
-    POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs vi_mode)
+    POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator ram background_jobs_joined)
 
     # Set 'context' segment colors
     # https://github.com/bhilburn/powerlevel9k/blob/next/segments/context/README.md
@@ -124,7 +127,7 @@ then
 
     # Set 'status' segment colors
     # https://github.com/bhilburn/powerlevel9k/blob/next/segments/status/README.md
-    POWERLEVEL9K_STATUS_CROSS=true
+    # POWERLEVEL9K_STATUS_CROSS=true
     POWERLEVEL9K_STATUS_OK_FOREGROUND=$P9KGT_GREEN
     POWERLEVEL9K_STATUS_ERROR_FOREGROUND=$P9KGT_RED
     POWERLEVEL9K_STATUS_OK_BACKGROUND=$P9KGT_TERMINAL_BACKGROUND
